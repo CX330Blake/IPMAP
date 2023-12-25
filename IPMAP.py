@@ -1,4 +1,13 @@
 import requests
+import folium
+import webbrowser
+
+
+def open_map(coordinate):
+    latitude = coordinate.split(",")[0]
+    longitude = coordinate.split(",")[1]
+    google_maps_url = f"https://www.google.com/maps/search/{latitude},{longitude}"
+    webbrowser.open(google_maps_url)
 
 
 def get_ip_info():
@@ -16,6 +25,14 @@ def get_ip_info():
     print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
     print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
     print(f"[+] Postal: {ip_info.get('postal', 'N/A')}")
+    openmap = input("Open Map on broswer? (Y/n)")
+    if openmap == "":
+        open_map(ip_info.get("loc"))
+    elif openmap[0].lower == "n" or openmap[0].lower == "no":
+        pass
+    else:
+        open_map(ip_info.get("loc"))
+    print("\n")
     print("\n")
 
 
@@ -30,6 +47,13 @@ def get_my_ip():
     )
     print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
     print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
+    openmap = input("Open Map on broswer? (Y/n)")
+    if openmap == "":
+        open_map(ip_info.get("loc"))
+    elif openmap[0].lower == "n" or openmap[0].lower == "no":
+        pass
+    else:
+        open_map(ip_info.get("loc"))
     print("\n")
 
 
