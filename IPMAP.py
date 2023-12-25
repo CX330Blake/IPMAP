@@ -1,6 +1,33 @@
 import requests
-import folium
 import webbrowser
+import importlib
+import subprocess
+import sys
+
+
+def check_module(module_name):
+    try:
+        importlib.import_module(module_name)
+        return True
+    except ImportError:
+        return False
+
+
+def install_requirement():
+    try:
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"]
+        )
+        print("\nRequirements are successfully installed!!!\n")
+    except subprocess.CalledProcessError:
+        print("\nError installing requirements. Please make sure 'pip' is installed.\n")
+
+
+required_modules = ["requests", "webbrowser"]
+if all(check_module(module) for module in required_modules):
+    pass
+else:
+    install_requirement()
 
 
 def open_map(coordinate):
@@ -25,15 +52,14 @@ def get_ip_info():
     print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
     print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
     print(f"[+] Postal: {ip_info.get('postal', 'N/A')}")
+    print("\n")
     openmap = input("Open Map on broswer? (Y/n)")
     if openmap == "":
         open_map(ip_info.get("loc"))
-    elif openmap[0].lower == "n" or openmap[0].lower == "no":
+    elif openmap[0].lower() == "n" or openmap[0].lower() == "no":
         pass
     else:
         open_map(ip_info.get("loc"))
-    print("\n")
-    print("\n")
 
 
 def get_my_ip():
@@ -47,14 +73,14 @@ def get_my_ip():
     )
     print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
     print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
+    print("\n")
     openmap = input("Open Map on broswer? (Y/n)")
     if openmap == "":
         open_map(ip_info.get("loc"))
-    elif openmap[0].lower == "n" or openmap[0].lower == "no":
+    elif openmap[0].lower() == "n" or openmap[0].lower() == "no":
         pass
     else:
         open_map(ip_info.get("loc"))
-    print("\n")
 
 
 if __name__ == "__main__":
