@@ -27,6 +27,7 @@ if all(check_module(module) for module in required_modules):
 else:
     install_requirement()
 
+from rgbprint import gradient_print, Color, rgbprint
 import requests
 import webbrowser
 
@@ -43,18 +44,29 @@ def get_ip_info():
     target_ip = input("Target IP address: ")
     api_url = f"https://ipinfo.io/{target_ip}/json"
     response = requests.get(api_url)
-    # data = response.json()
-    # return data
     ip_info = response.json()
-    print(f"[+] IP address: {ip_info.get('ip', 'N/A')}")
     print(
-        f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}"
+        rgbprint("[+]", color="green"),
+        f"IP address: {ip_info.get('ip', 'N/A')}",
     )
-    print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
-    print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
-    print(f"[+] Postal: {ip_info.get('postal', 'N/A')}")
+    print(
+        rgbprint("[+]", color="green"),
+        f"Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}",
+    )
+    print(
+        rgbprint("[+]", color="green"),
+        f"Coordinate: ({ip_info.get('loc', 'N/A')})",
+    )
+    print(
+        rgbprint("[+]", color="green"),
+        f"ISP: {ip_info.get('org', 'N/A')}",
+    )
+    print(
+        rgbprint("[+]", color="green"),
+        f"Postal: {ip_info.get('postal', 'N/A')}",
+    )
     print("\n")
-    openmap = input("Open Map on broswer? (Y/n)")
+    openmap = input("Open Map on browser? (Y/n)")
     if openmap == "":
         open_map(ip_info.get("loc"))
     elif openmap[0].lower() == "n" or openmap[0].lower() == "no":
@@ -68,14 +80,24 @@ def get_my_ip():
     api_url = f"https://ipinfo.io/json"
     response = requests.get(api_url)
     ip_info = response.json()
-    print(f"[+] IP address: {ip_info.get('ip', 'N/A')}")
     print(
-        f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}"
+        rgbprint("[+]", color="green"),
+        f"IP address: {ip_info.get('ip', 'N/A')}",
     )
-    print(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})")
-    print(f"[+] ISP: {ip_info.get('org', 'N/A')}")
+    print(
+        rgbprint("[+]", color="green"),
+        f"Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}",
+    )
+    print(
+        rgbprint("[+]", color="green"),
+        f"Coordinate: ({ip_info.get('loc', 'N/A')})",
+    )
+    print(
+        rgbprint("[+]", color="green"),
+        f"ISP: {ip_info.get('org', 'N/A')}",
+    )
     print("\n")
-    openmap = input("Open Map on broswer? (Y/n)")
+    openmap = input("Open Map on browser? (Y/n)")
     if openmap == "":
         open_map(ip_info.get("loc"))
     elif openmap[0].lower() == "n" or openmap[0].lower() == "no":
@@ -96,7 +118,7 @@ __/ /  _  ____/_  /  / / _  ___ |  ____/
 </> Version 1.0
 -----------------------------------------
     """
-    print(hello)
+    gradient_print(hello, start_color=0x4BBEE3, end_color=Color.medium_violet_red)
     while True:
         options = int(
             input(
@@ -115,7 +137,9 @@ _  / / /  / / /__  / __  /
 / /_/ // /_/ /__  /_ _  /    
 \___\_\\____/ /____/ /_/     
             """
-            print(quit)
+            gradient_print(
+                quit, start_color=0x4BBEE3, end_color=Color.medium_violet_red
+            )
             break
         else:
-            print("Plz input again")
+            rgbprint("Plz input again", color="red")
