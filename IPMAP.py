@@ -41,35 +41,47 @@ import webbrowser
 
 
 def get_ip_info():
-    print("\n")
+    print()
     target_ip = input("Target IP address: ")
     api_url = f"https://ipinfo.io/{target_ip}/json"
     response = requests.get(api_url)
     ip_info = response.json()
-    if 400 <= int(ip_info.get("status")) <= 499:
-        rgbprint(f"\n[!] IP {target_ip} INFO NOT FOUND.\n", color="red")
-        return
-    coordinate = ip_info.get("loc")
+    print()
+    ip_address = f"[+] IP address: {ip_info.get('ip', 'N/A')}"
+    location = f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}"
+    coordinate_str = f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})"
+    coordinate = ip_info.get("loc", "N/A")
     latitude = coordinate.split(",")[0]
     longitude = coordinate.split(",")[1]
-    google_maps_url = f"https://www.google.com/maps/search/{latitude},{longitude}"
-    rgbprint(f"[+] IP address: {ip_info.get('ip', 'N/A')}", color=0x4BBEE3)
-    rgbprint(
-        f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}",
-        color=0x4BBEE3,
+    ISP = f"[+] ISP: {ip_info.get('org', 'N/A')}"
+    postal = f"[+] Postal: {ip_info.get('postal', 'N/A')}"
+    google_maps_url = (
+        f"[+] Google Map: https://www.google.com/maps/search/{latitude},{longitude}"
     )
-    rgbprint(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})", color=0x4BBEE3)
-    rgbprint(f"[+] ISP: {ip_info.get('org', 'N/A')}", color=0x4BBEE3)
-    rgbprint(f"[+] Postal: {ip_info.get('postal', 'N/A')}", color=0x4BBEE3)
-    rgbprint(f"[+] Google Map: {google_maps_url}", color=0x4BBEE3)
-    print("\n")
-    # openmap = input("Open Map on browser? (Y/n)")
-    # if openmap == "":
-    #     open_map(ip_info.get("loc"))
-    # elif openmap[0].lower() == "n" or openmap[0].lower() == "no":
-    #     pass
-    # else:
-    #     open_map(ip_info.get("loc"))
+    for char in ip_address:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in location:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in coordinate_str:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in ISP:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in postal:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in google_maps_url:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
 
 
 def get_my_ip():
@@ -77,19 +89,36 @@ def get_my_ip():
     api_url = f"https://ipinfo.io/json"
     response = requests.get(api_url)
     ip_info = response.json()
-    coordinate = ip_info.get("loc")
+    ip_address = f"[+] IP address: {ip_info.get('ip', 'N/A')}"
+    location = f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}"
+    coordinate_str = f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})"
+    coordinate = ip_info.get("loc", "N/A")
     latitude = coordinate.split(",")[0]
     longitude = coordinate.split(",")[1]
-    google_maps_url = f"https://www.google.com/maps/search/{latitude},{longitude}"
-    rgbprint(f"[+] IP address: {ip_info.get('ip', 'N/A')}", color=0x4BBEE3)
-    rgbprint(
-        f"[+] Location: {ip_info.get('city', 'N/A')}, {ip_info.get('region', 'N/A')}, {ip_info.get('country', 'N/A')}",
-        color=0x4BBEE3,
+    ISP = f"[+] ISP: {ip_info.get('org', 'N/A')}"
+    google_maps_url = (
+        f"[+] Google Map: https://www.google.com/maps/search/{latitude},{longitude}"
     )
-    rgbprint(f"[+] Coordinate: ({ip_info.get('loc', 'N/A')})", color=0x4BBEE3)
-    rgbprint(f"[+] ISP: {ip_info.get('org', 'N/A')}", color=0x4BBEE3)
-    rgbprint(f"[+] Google Map: {google_maps_url}", color=0x4BBEE3)
-    print("\n")
+    for char in ip_address:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in location:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in coordinate_str:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in ISP:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
+    for char in google_maps_url:
+        rgbprint(char, color=0x4BBEE3, end="")
+        time.sleep(0.007)
+    print()
     # openmap = input("Open Map on browser? (Y/n)")
     # if openmap == "":
     #     open_map(ip_info.get("loc"))
@@ -110,23 +139,23 @@ __/ /  _  ____/_  /  / / _  ___ |  ____/
 </> Create by CX330Blake
 </> Version 1.1
 -----------------------------------------
-    """
-    gradient_print(hello, start_color=0x4BBEE3, end_color=Color.medium_violet_red)
+"""
+    gradient_print(
+        hello, start_color=0x4BBEE3, end_color=Color.medium_violet_red, end=""
+    )
 
 
-def print_quit(delay=0.01):
+def print_quit():
     quit = r"""
 ____________  ________________
 __  __ \_  / / / /_  _/__  __/
 _  / / /  / / /__  / __  /   
 / /_/ // /_/ /__  /_ _  /    
 \___\_\\____/ /____/ /_/     
-            """
-    for char in quit:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
-    # gradient_print(quit, start_color=Color.medium_violet_red, end_color=0x4BBEE3)
+"""
+    gradient_print(
+        quit, start_color=Color.medium_violet_red, end_color=0x4BBEE3, end=""
+    )
 
 
 if __name__ == "__main__":
