@@ -91,16 +91,15 @@ ____  _/__  __ \__   |/  /__    |__  __ \
 __/ /  _  ____/_  /  / / _  ___ |  ____/ 
 /___/  /_/     /_/  /_/  /_/  |_/_/      
 
------------------------------------------
-Create by CX330Blake
-Version 1.0
+</> Create by CX330Blake
+</> Version 1.0
 -----------------------------------------
     """
     print(hello)
     while True:
         options = int(
             input(
-                "Choose an option:\n1. Find my IP\n2. Find other's IP\n3. QUIT\nChoose: "
+                "Choose an option:\n[1] Find my IP\n[2] Find other's IP\n[3] QUIT\nChoose: "
             )
         )
         if options == 1:
